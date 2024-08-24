@@ -8,18 +8,30 @@ use Illuminate\Database\Eloquent\Model;
 class HasilSolusiTerbaik extends Model
 {
     protected $fillable = [
-        'user_id','datasolusiterbaik_id','waktu','hasil_diagnosa','solusi_terbaik',
+        'user_id',
+        'datasolusiterbaik_id',
+        'keterangan_id',
+        'waktu',
+        'hasil_diagnosa',
+        'solusi_terbaik',
     ];
-    public function hasilsolusiterbaik() {
+    public function hasilsolusiterbaik()
+    {
         return $this->belongsTo('App\Models\HasilSolusiTerbaik');
     }
     // public function tes() {
     //     return $this->belongsTo('App\Models\TesKesehatanMental');
     // }
-    public function datasolusiterbaik() {
+    public function datasolusiterbaik()
+    {
         return $this->belongsTo('App\Models\DataSolusiTerbaik');
     }
-    public function user(){
+    public function user()
+    {
         return $this->belongsTo('App\Models\User');
+    }
+    public function keterangan()
+    {
+        return $this->belongsTo('App\Models\KeteranganTes');
     }
 }

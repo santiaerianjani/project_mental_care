@@ -239,150 +239,164 @@
       <div class="col-lg-12">
         <br>
         <div class="card">
-          <div class="card-body">
-            <!-- Table with stripped rows -->
-            <table class="table table-striped">
-              <thead>
-                <tr>
-                  <th scope="col">No</th>
-                  <th scope="col">Nama Pengguna</th>
-                  <th scope="col">Opsi</th>
-                </tr>
-              </thead>
-              <tbody>
-                @foreach($admin as $admins)
-                <tr>
-                  <td scope="row">{{ $loop->iteration }}</td>
-                  <td>{{ $admins->user->name }}</td>
-                  <td>
-                    <div class="d-flex">
-                      <div class="mr-2">
-                        <!-- Detail Modal Button -->
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#viewModal{{$admins->id}}">
-                          Lihat
-                        </button>
-                        <!-- Delete Modal Button -->
-                        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal{{$admins->id}}">
-                          Hapus
-                        </button>
-                      </div>
-                    </div>
-                  </td>
-                </tr>
+            <div class="card-body">
+                <!-- Table with striped rows -->
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">No</th>
+                            <th scope="col">Nama Pengguna</th>
+                            <th scope="col">Opsi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($admin as $admins)
+                        <tr>
+                            <th scope="row">{{ $loop->iteration }}</th> <!-- scope="row" digunakan di <th> -->
+                            <td>{{ $admins->name }}</td>
+                            <td>
+                                <div class="d-flex">
+                                    <div class="mr-2">
+                                        <!-- Detail Modal Button -->
+                                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#viewModal{{$admins->id}}">
+                                            Lihat
+                                        </button>
+                                        <!-- Delete Modal Button -->
+                                        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal{{$admins->id}}">
+                                            Hapus
+                                        </button>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
 
-                <!-- View Modal -->
-                <div class="modal fade" id="viewModal{{$admins->id}}" tabindex="-1" aria-labelledby="viewModalLabel{{$admins->id}}" aria-hidden="true">
-                  <div class="modal-dialog">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="viewModalLabel{{$admins->id}}">Detail Data Tes Kesehatan Mental</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                      </div>
-                      <div class="modal-body">
-                        <style>
-                          .modal-body {
-                            padding: 20px;
-                          }
+                        <!-- View Modal -->
+                        <div class="modal fade" id="viewModal{{$admins->id}}" tabindex="-1" aria-labelledby="viewModalLabel{{$admins->id}}" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="viewModalLabel{{$admins->id}}">Detail Data Tes Kesehatan Mental</h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <style>
+                                            .modal-body {
+                                                padding: 20px;
+                                            }
 
-                          .card {
-                            border: 1px solid #ddd;
-                            border-radius: 4px;
-                            margin-bottom: 20px;
-                            background-color: #f9f9f9;
-                          }
+                                            .card {
+                                                border: 1px solid #ddd;
+                                                border-radius: 4px;
+                                                margin-bottom: 20px;
+                                                background-color: #f9f9f9;
+                                            }
 
-                          .card-header {
-                            padding: 10px;
-                            border-bottom: 1px solid #ddd;
-                            font-size: 18px;
-                            font-weight: bold;
-                          }
+                                            .card-header {
+                                                padding: 10px;
+                                                border-bottom: 1px solid #ddd;
+                                                font-size: 18px;
+                                                font-weight: bold;
+                                            }
 
-                          .card-body {
-                            padding: 15px;
-                          }
+                                            .card-body {
+                                                padding: 15px;
+                                            }
 
-                          .card-body .statement {
-                            display: flex;
-                            flex-wrap: wrap;
-                            margin-bottom: 15px;
-                          }
+                                            .card-body .statement {
+                                                display: flex;
+                                                flex-wrap: wrap;
+                                                margin-bottom: 15px;
+                                            }
 
-                          .card-body .statement p {
-                            margin: 5px 10px;
-                            flex: 1 1 45%;
-                          }
+                                            .card-body .statement p {
+                                                margin: 5px 10px;
+                                                flex: 1 1 45%;
+                                            }
 
-                          .card-footer {
-                            padding: 10px;
-                            border-top: 1px solid #ddd;
-                            font-size: 16px;
-                            font-weight: bold;
-                          }
+                                            .card-footer {
+                                                padding: 10px;
+                                                border-top: 1px solid #ddd;
+                                                font-size: 16px;
+                                                font-weight: bold;
+                                            }
 
-                          .card-footer .category {
-                            margin-top: 5px;
-                          }
-                        </style>
-                        @php
-                        $data = App\Models\TesKesehatanMental::where('user_id', $admins->user->id)->get();
-                        @endphp
-                        @foreach ($data as $datas)
-                        <div class="card">
-                          <div class="card-header">
-                            Test Data Kesehatan Mental
-                          </div>
-                          <div class="card-body">
-                            <p><strong>Waktu:</strong> {{ $datas->waktu }}</p>
-                            <p><strong>Keterangan:</strong> {{ $datas->keterangan }}</p>
-                            <div class="statement">
-                              @for ($i = 1; $i <= 21; $i++) <p><strong>Pernyataan {{ $i }}:</strong> {{ $datas->{'pernyataan'.$i} }}</p>
-                                @endfor
+                                            .card-footer .category {
+                                                margin-top: 5px;
+                                            }
+                                        </style>
+                                        @php
+                                            $keterangan = App\Models\KeteranganTes::where('user_id', $admins->id)->get();
+                                        @endphp
+                                        @foreach ($keterangan as $item)
+                                            @php
+                                                $data = App\Models\TesKesehatanMental::where('keterangan_id', $item->id)->get();
+                                            @endphp
+
+                                            <div class="card">
+                                                <div class="card-header">
+                                                    Test Data Kesehatan Mental
+                                                </div>
+                                                <div class="card-body">
+                                                    <p><strong>Waktu:</strong> {{ $item->waktu }}</p>
+                                                    <p><strong>Keterangan:</strong> {{ $item->keterangan }}</p>
+                                                    <div class="statement">
+                                                        @foreach ($data as $datas)
+                                                            <p><strong>{{ $datas->jawaban->pernyataan->pernyataan }}:</strong> {{ $datas->jawaban->point }}</p>
+                                                        @endforeach
+                                                    </div>
+                                                </div>
+                                                <div class="card-footer">
+                                                    <p class="total"><strong>Total Nilai:</strong> {{ $item->total }}</p>
+                                                    <p class="category">
+                                                        <strong>Kategori:</strong>
+                                                        @if($item->total >= 0 && $item->total <= 13)
+                                                            Depresi Normal
+                                                        @elseif($item->total >= 14 && $item->total <= 19)
+                                                            Depresi Ringan
+                                                        @elseif($item->total >= 20 && $item->total <= 28)
+                                                            Depresi Sedang
+                                                        @elseif($item->total >= 29 && $item->total <= 63)
+                                                            Depresi Berat
+                                                        @endif
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kembali</button>
+                                    </div>
+                                </div>
                             </div>
-                          </div>
-                          <div class="card-footer">
-                            <p class="total"><strong>Total Nilai:</strong> {{ $datas->total }}</p>
-                            <p class="category">
-                              <strong>Kategori:</strong>
-                              @if($datas->total >= 0 && $datas->total <= 13) Depresi Normal @elseif($datas->total >= 14 && $datas->total <= 19) Depresi Ringan @elseif($datas->total >= 20 && $datas->total <= 28) Depresi Sedang @elseif($datas->total >= 29 && $datas->total <= 63) Depresi Berat @endif </p>
-                          </div>
+                        </div>
+
+                        <!-- Delete Modal -->
+                        <div class="modal fade" id="deleteModal{{$admins->id}}" tabindex="-1" aria-labelledby="deleteModalLabel{{$admins->id}}" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="deleteModalLabel{{$admins->id}}">Hapus Data Tes Kesehatan Mental</h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p>Apakah Anda yakin ingin menghapus data ini?</p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <form action="{{ route('layouts.admin.data_tes_kesehatan_mental.datateskesehatanmental_destroy', $admins->id) }}" method="post">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger">Hapus</button>
+                                        </form>
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         @endforeach
-                      </div>
+                    </tbody>
+                </table>
+            </div>
 
-                      <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kembali</button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- Delete Modal -->
-                <div class="modal fade" id="deleteModal{{$admins->id}}" tabindex="-1" aria-labelledby="deleteModalLabel{{$admins->id}}" aria-hidden="true">
-                  <div class="modal-dialog">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="deleteModalLabel{{$admins->id}}">Hapus Data Tes Kesehatan Mental</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                      </div>
-                      <div class="modal-body">
-                        <p>Apakah Anda yakin ingin menghapus data ini?</p>
-                      </div>
-                      <div class="modal-footer">
-                        <form action="{{ route('layouts.admin.data_tes_kesehatan_mental.datateskesehatanmental_destroy', $admins->id) }}" method="post">
-                          @csrf
-                          @method('DELETE')
-                          <button type="submit" class="btn btn-danger">Hapus</button>
-                        </form>
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                @endforeach
-              </tbody>
-            </table>
-          </div>
         </div>
       </div>
     </div>

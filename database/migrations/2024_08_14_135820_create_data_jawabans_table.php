@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('data_jawabans', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->unsignedBigInteger('pernyataan_id'); 
+            $table->unsignedBigInteger('pernyataan_id');
             $table->integer('point');
             $table->string('jawaban');
             $table->foreign('pernyataan_id')->references('id')->on('data_pernyataans')->onDelete('cascade');

@@ -100,15 +100,15 @@ class TesKesehatanMentalController extends Controller
         if ($caridata) {
             $params2['user_id'] = Auth::user()->id;
             $params2['datasolusiterbaik_id'] = $caridata->id;
+            $params2['keterangan_id'] = $teskesehatanmental->id;
             $hasil = HasilSolusiTerbaik::create($params2);
-            foreach($caridatas as $tambahdata){
+            foreach ($caridatas as $tambahdata) {
                 $params3['keterangan_id'] = $teskesehatanmental->id;
                 $params3['user_id'] = Auth::user()->id;
                 $params3['jawaban_id'] = $tambahdata->id;
                 // dd($params3);
                 TesKesehatanMental::create($params3);
             }
-            
         } else {
             // Handle the case where no matching DataSolusiTerbaik was found
             return redirect()->route('layouts.user.tes_kesehatan_mental.teskesehatanmental')

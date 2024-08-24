@@ -253,10 +253,14 @@
                 <tfoot>
                   <tr>
                     <th class="text-center">Total Nilai</th>
+                    <td class="text-center">{{$teskesehatanmentals->total}}</td>
                   </tr>
                   <tr>
                     <th class="text-center">Kategori</th>
-                    <td class="text-center">
+                    @php
+                        $hasil = App\Models\HasilSolusiTerbaik::where('keterangan_id',$teskesehatanmentals->id)->first();
+                    @endphp
+                    <td class="text-center">{{$hasil->datasolusiterbaik->kategori_depresi}}
                     </td>
                   </tr>
                 </tfoot>

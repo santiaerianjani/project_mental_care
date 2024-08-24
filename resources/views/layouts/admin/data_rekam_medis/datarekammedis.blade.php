@@ -254,7 +254,7 @@
                   @foreach($hasilsolusiterbaik as $admins)
                   <tr>
                     <td scope="row">{{ $loop->iteration }}</td>
-                    <td>{{ $admins->tes->user->name }}</td>
+                    <td>{{ $admins->keterangan->user->name }}</td>
                     <td>
                       <div class="d-flex gap-2">
                         <!-- Detail Modal Button -->
@@ -307,7 +307,7 @@
                           @foreach ($data as $index => $datas)
                           <div class="data-group">
                             <p class="test-number">Tes ke {{ $index + 1 }}</p>
-                            <p><strong>Waktu:</strong> {{ $datas->tes->waktu }}</p>
+                            <p><strong>Waktu:</strong> {{ $datas->waktu }}</p>
                             <p><strong>Kategori Depresi:</strong> {{ $datas->datasolusiterbaik->kategori_depresi }}</p>
                             <p><strong>Solusi Terbaik:</strong> {{ $datas->datasolusiterbaik->solusi_terbaik }}</p>
                           </div>
